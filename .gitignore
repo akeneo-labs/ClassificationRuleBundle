@@ -1,0 +1,7 @@
+vendor/*
+bin/*
+coverage/*
+coverage.xml
+build/
+composer.phar
+composer.lock
