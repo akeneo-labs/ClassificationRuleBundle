@@ -77,7 +77,7 @@ class ProductsUpdater extends BaseProductsUpdater
     {
         foreach ($products as $product) {
             $category = $this->categoryRepository->findOneByIdentifier($action->getCategoryCode());
-            if ($category) {
+            if (null !== $category) {
                 $product->addCategory($category);
             }
         }
