@@ -3,6 +3,7 @@
 namespace spec\PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule;
 
 use PhpSpec\ObjectBehavior;
+use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryActionInterface;
 use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryActionInterface;
 use Prophecy\Argument;
 
@@ -42,6 +43,22 @@ class SetCategoryActionDenormalizerSpec extends ObjectBehavior
     function it_does_not_support_denormalization_for_wrong_object()
     {
         $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
+        $type = '\PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCondition';
+
+        $this->supportsDenormalization($data, $type)->shouldReturn(false);
+    }
+
+    function it_does_not_support_denormalization_for_wrong_type()
+    {
+        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
+        $type = 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction';
+
+        $this->supportsDenormalization($data, $type)->shouldReturn(false);
+    }
+
+    function it_does_not_support_denormalization_for_wrong_object_and_wrong_type()
+    {
+        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
         $type = '\PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCondition';
 
         $this->supportsDenormalization($data, $type)->shouldReturn(false);
