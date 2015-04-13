@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To be defined.
- */
-
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Engine\ProductRuleApplier;
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;

@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To be defined.
- */
-
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Model;
 
 /**
@@ -22,7 +18,7 @@ abstract class AbstractCategoryAction
      */
     public function __construct(array $data)
     {
-        $this->categoryCode  = isset($data['categoryCode']) ? $data['categoryCode'] : null;
+        $this->categoryCode = isset($data['categoryCode']) ? $data['categoryCode'] : null;
     }
 
     /**
