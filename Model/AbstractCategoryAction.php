@@ -22,7 +22,9 @@ abstract class AbstractCategoryAction
     }
 
     /**
-     * {@inheritdoc}
+     * Get category code.
+     *
+     * @return null|string
      */
     public function getCategoryCode()
     {
@@ -30,7 +32,11 @@ abstract class AbstractCategoryAction
     }
 
     /**
-     * {@inheritdoc}
+     * Set category code.
+     *
+     * @param $categoryCode
+     *
+     * @return $this
      */
     public function setCategoryCode($categoryCode)
     {

@@ -22,6 +22,7 @@ class SetCategoryActionDenormalizer implements DenormalizerInterface
     {
         $this->setActionClass = $setActionClass;
     }
+
     /**
      * {@inheritdoc}
      */
