@@ -34,7 +34,7 @@ abstract class AbstractCategoryAction
     /**
      * Set category code.
      *
-     * @param $categoryCode
+     * @param string $categoryCode
      *
      * @return $this
      */
