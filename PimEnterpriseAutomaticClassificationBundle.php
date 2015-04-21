@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To be defined.
- */
-
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

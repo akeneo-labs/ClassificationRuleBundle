@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To be defined.
- */
-
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle\DependencyInjection;
 
 use Akeneo\Bundle\StorageUtilsBundle\DependencyInjection\AkeneoStorageUtilsExtension;

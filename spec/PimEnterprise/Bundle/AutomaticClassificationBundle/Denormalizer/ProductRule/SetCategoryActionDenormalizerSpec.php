@@ -7,16 +7,16 @@ use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryA
 use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryActionInterface;
 use Prophecy\Argument;
 
-class AddCategoryActionDenormalizerSpec extends ObjectBehavior
+class SetCategoryActionDenormalizerSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryAction');
+        $this->beConstructedWith('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule\AddCategoryActionDenormalizer');
+        $this->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule\SetCategoryActionDenormalizer');
     }
 
     function it_implements()
@@ -26,23 +26,23 @@ class AddCategoryActionDenormalizerSpec extends ObjectBehavior
 
     function it_denormalizes()
     {
-        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
+        $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
 
-        $this->denormalize($data, 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryAction')
-            ->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryAction');
+        $this->denormalize($data, 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction')
+            ->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction');
     }
 
     function it_supports_denormalization()
     {
-        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
-        $type = 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryAction';
+        $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
+        $type = 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction';
 
         $this->supportsDenormalization($data, $type)->shouldReturn(true);
     }
 
     function it_does_not_support_denormalization_for_wrong_object()
     {
-        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
+        $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
         $type = '\PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCondition';
 
         $this->supportsDenormalization($data, $type)->shouldReturn(false);
@@ -50,15 +50,15 @@ class AddCategoryActionDenormalizerSpec extends ObjectBehavior
 
     function it_does_not_support_denormalization_for_wrong_type()
     {
-        $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
-        $type = 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryAction';
+        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
+        $type = 'PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction';
 
         $this->supportsDenormalization($data, $type)->shouldReturn(false);
     }
 
     function it_does_not_support_denormalization_for_wrong_object_and_wrong_type()
     {
-        $data['type'] = ProductSetCategoryActionInterface::ACTION_TYPE;
+        $data['type'] = ProductAddCategoryActionInterface::ACTION_TYPE;
         $type = '\PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCondition';
 
         $this->supportsDenormalization($data, $type)->shouldReturn(false);

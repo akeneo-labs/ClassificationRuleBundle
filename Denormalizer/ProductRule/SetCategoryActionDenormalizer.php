@@ -2,7 +2,7 @@
 
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule;
 
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryActionInterface;
+use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryActionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -10,24 +10,25 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  *
  * @author Damien Carcel (https://github.com/damien-carcel)
  */
-class AddCategoryActionDenormalizer implements DenormalizerInterface
+class SetCategoryActionDenormalizer implements DenormalizerInterface
 {
     /** @var string */
-    protected $addActionClass;
+    protected $setActionClass;
 
     /**
-     * @param string $addActionClass
+     * @param string $setActionClass
      */
-    public function __construct($addActionClass)
+    public function __construct($setActionClass)
     {
-        $this->addActionClass = $addActionClass;
+        $this->setActionClass = $setActionClass;
     }
+
     /**
      * {@inheritdoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        return new $this->addActionClass($data);
+        return new $this->setActionClass($data);
     }
 
     /**
@@ -35,8 +36,8 @@ class AddCategoryActionDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === $this->addActionClass &&
+        return $type === $this->setActionClass &&
             isset($data['type']) &&
-            ProductAddCategoryActionInterface::ACTION_TYPE === $data['type'];
+            ProductSetCategoryActionInterface::ACTION_TYPE === $data['type'];
     }
 }

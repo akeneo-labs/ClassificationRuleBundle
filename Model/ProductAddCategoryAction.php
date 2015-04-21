@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To be defined.
- */
-
 namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Model;
 
 /**
@@ -12,34 +8,6 @@ namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Model;
  *
  * @author Damien Carcel (https://github.com/damien-carcel)
  */
-class ProductAddCategoryAction implements ProductAddCategoryActionInterface
+class ProductAddCategoryAction extends AbstractCategoryAction implements ProductAddCategoryActionInterface
 {
-    /** @var string */
-    protected $categoryCode;
-
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        $this->categoryCode  = isset($data['categoryCode']) ? $data['categoryCode'] : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoryCode()
-    {
-        return $this->categoryCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategoryCode($categoryCode)
-    {
-        $this->categoryCode = $categoryCode;
-
-        return $this;
-    }
 }
