@@ -8,7 +8,9 @@ use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
  * Add action used in product rules.
  * An add action category is used to ad a product in a category.
  *
- * @author Damien Carcel (https://github.com/damien-carcel)
+ * @author    Damien Carcel <damien.carcel@akeneo.com>
+ * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 interface ProductAddCategoryActionInterface extends ActionInterface
 {
