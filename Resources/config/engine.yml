@@ -1,5 +1,5 @@
 parameters:
-    pimee_catalog_rule.applier.product.updater.class: PimEnterprise\Bundle\AutomaticClassificationBundle\Engine\ProductRuleApplier\ProductsUpdater
+    pimee_catalog_rule.applier.product.updater.class: PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier\ProductsUpdater
 
 services:
     pimee_catalog_rule.applier.product.updater:

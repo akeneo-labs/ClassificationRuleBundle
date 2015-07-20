@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\PimEnterprise\Bundle\AutomaticClassificationBundle\Engine\ProductRuleApplier;
+namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier;
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
 use PhpSpec\ObjectBehavior;
@@ -11,8 +11,8 @@ use Pim\Bundle\CatalogBundle\Model\ProductTemplateInterface;
 use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
 use Pim\Bundle\CatalogBundle\Updater\ProductTemplateUpdaterInterface;
 use Pim\Bundle\CatalogBundle\Updater\ProductUpdaterInterface;
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryActionInterface;
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCopyValueActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductSetValueActionInterface;
 use Prophecy\Argument;
@@ -33,7 +33,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Engine\ProductRuleApplier\ProductsUpdater');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier\ProductsUpdater');
     }
 
     function it_does_not_update_products_when_no_actions(
@@ -109,7 +109,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         RuleInterface $rule,
         ProductInterface $product,
         ProductAddCategoryActionInterface $action
-    ){
+    ) {
         $action->getCategoryCode()->willReturn('categoryCode');
         $rule->getActions()->willReturn([$action]);
 
@@ -131,7 +131,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         RuleInterface $rule,
         ProductInterface $product,
         ProductSetCategoryActionInterface $action
-    ){
+    ) {
         $action->getCategoryCode()->willReturn('categoryCode');
         $rule->getActions()->willReturn([$action]);
 
@@ -153,7 +153,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         RuleInterface $rule,
         ProductInterface $product,
         ProductSetCategoryActionInterface $action
-    ){
+    ) {
         $action->getCategoryCode()->willReturn(null);
         $rule->getActions()->willReturn([$action]);
 

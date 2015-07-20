@@ -1,14 +1,16 @@
 <?php
 
-namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule;
+namespace PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule;
 
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
  * Denormalize product set category rule actions.
  *
- * @author Damien Carcel (https://github.com/damien-carcel)
+ * @author    Damien Carcel <damien.carcel@akeneo.com>
+ * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class AddCategoryActionDenormalizer implements DenormalizerInterface
 {
