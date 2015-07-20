@@ -1,4 +1,4 @@
-# Akeneo Automatic classification bundle
+# Akeneo Classification rule bundle
 
 A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibility to classify products.
 
@@ -13,14 +13,14 @@ As the Git repository is private, you need to add it to the composer.json of you
     "repositories": [
             {
                 "type": "vcs",
-                "url": "https://github.com/akeneo/AutomaticClassificationBundle.git",
+                "url": "https://github.com/akeneo-labs/ClassificationRuleBundle.git",
                 "branch": "master"
             }
         ]
 
 Then install the bundle with composer:
 
-    $ php composer.phar require akeneo/automatic-classification-bundle:1.0.*
+    $ php composer.phar require akeneo-labs/classification-rule-bundle:1.0.*
 
 If you want to use the development version (only for test purpose, do not use it in production), replace `1.0.*` by `dev-master` in the previous command.
 
@@ -28,7 +28,7 @@ Enable the bundle in the `app/AppKernel.php` file, in the `getPimEnterpriseBundl
 
     return[
         …
-        new PimEnterprise\Bundle\AutomaticClassificationBundle\PimEnterpriseAutomaticClassificationBundle(),
+        new PimEnterprise\Bundle\ClassificationRuleBundle\PimEnterpriseClassificationRuleBundle(),
     ];
 
 Then clean the cache:

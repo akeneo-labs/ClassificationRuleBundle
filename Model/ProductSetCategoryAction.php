@@ -1,6 +1,6 @@
 <?php
 
-namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Model;
+namespace PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 /**
  * Set action used in product rules.

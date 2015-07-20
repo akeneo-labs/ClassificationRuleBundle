@@ -1,8 +1,8 @@
 <?php
 
-namespace PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule;
+namespace PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule;
 
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductAddCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**

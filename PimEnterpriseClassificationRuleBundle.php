@@ -1,6 +1,6 @@
 <?php
 
-namespace PimEnterprise\Bundle\AutomaticClassificationBundle;
+namespace PimEnterprise\Bundle\ClassificationRuleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -11,6 +11,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class PimEnterpriseAutomaticClassificationBundle extends Bundle
+class PimEnterpriseClassificationRuleBundle extends Bundle
 {
 }

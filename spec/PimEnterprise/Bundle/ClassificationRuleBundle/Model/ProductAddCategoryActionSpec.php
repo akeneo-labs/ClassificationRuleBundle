@@ -1,18 +1,18 @@
 <?php
 
-namespace spec\PimEnterprise\Bundle\AutomaticClassificationBundle\Model;
+namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction;
 use Prophecy\Argument;
 
-class ProductSetCategoryActionSpec extends ObjectBehavior
+class ProductAddCategoryActionSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith(
             [
-                'type' => ProductSetCategoryAction::ACTION_TYPE,
+                'type' => ProductAddCategoryAction::ACTION_TYPE,
                 'categoryCode' => 'categoryCode',
             ]
         );
@@ -20,7 +20,7 @@ class ProductSetCategoryActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryAction');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction');
     }
 
     function it_is_an_action()
@@ -30,7 +30,7 @@ class ProductSetCategoryActionSpec extends ObjectBehavior
 
     function it_is_a_product_copy_value_action()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\AutomaticClassificationBundle\Model\ProductSetCategoryActionInterface');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface');
     }
 
     function it_constructs_a_product_action()

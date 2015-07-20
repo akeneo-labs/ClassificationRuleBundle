@@ -1,6 +1,6 @@
 parameters:
-    pimee_automatic_classification.denormalizer.product_rule.add_category_action.class: PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule\AddCategoryActionDenormalizer
-    pimee_automatic_classification.denormalizer.product_rule.set_category_action.class: PimEnterprise\Bundle\AutomaticClassificationBundle\Denormalizer\ProductRule\SetCategoryActionDenormalizer
+    pimee_automatic_classification.denormalizer.product_rule.add_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\AddCategoryActionDenormalizer
+    pimee_automatic_classification.denormalizer.product_rule.set_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\SetCategoryActionDenormalizer
 
 services:
     pimee_catalog_rule.denormalizer.product_rule.chained:
