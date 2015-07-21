@@ -12,4 +12,35 @@ namespace PimEnterprise\Bundle\ClassificationRuleBundle\Model;
  */
 class ProductSetCategoryAction extends AbstractCategoryAction implements ProductSetCategoryActionInterface
 {
+    /** @var string */
+    protected $treeCode;
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+
+        $this->treeCode = isset($data['treeCode']) ? $data['treeCode'] : null;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTreeCode()
+    {
+        return $this->treeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTreeCode($treeCode)
+    {
+        $this->treeCode = $treeCode;
+
+        return $this;
+    }
 }

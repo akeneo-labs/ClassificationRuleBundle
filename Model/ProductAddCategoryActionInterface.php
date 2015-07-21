@@ -14,6 +14,7 @@ use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
  */
 interface ProductAddCategoryActionInterface extends ActionInterface
 {
+    /** @staticvar string */
     const ACTION_TYPE = 'add_category';
 
     /**
