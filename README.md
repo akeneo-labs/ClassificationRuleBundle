@@ -8,17 +8,7 @@ A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibilit
 
 ## Installation
 
-As the Git repository is private, you need to add it to the composer.json of your project:
-
-    "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/akeneo-labs/ClassificationRuleBundle.git",
-                "branch": "master"
-            }
-        ]
-
-Then install the bundle with composer:
+You can install the bundle with composer:
 
     $ php composer.phar require akeneo-labs/classification-rule-bundle:1.0.*
 
@@ -40,7 +30,9 @@ Then clean the cache:
 This bundle is an extension of the CatalogRuleBundle, so it uses the same conditions, and add a new set of actions:
 
 * `add_category`: add a product to a category,
-* `set_category`: add a product to a category and remove it from all other category. If you set the category code to `null`, it will declassify the product.
+* `set_category`: add a product to a category and remove it from all other category.
+If you set the category code to `null`, it will declassify the product.
+You can also define a tree to declassify only the product's categories of this tree.
 
 The category must exists, or the rule will not apply.
 
@@ -84,5 +76,15 @@ The category must exists, or the rule will not apply.
             actions:
                 - type:         set_category
                   categoryCode: null
+        led_tvs_remove_category_on_master_tree:
+            conditions:
+                - field:    family.code
+                  operator: IN
+                  value:
+                    - led_tvs
+            actions:
+                - type:     set_category
+                  treeCode: master
+
 
 Take a look to [icecat_demo_dev rule fixtures](https://github.com/akeneo/pim-enterprise-dev/blob/1.3/src/PimEnterprise/Bundle/InstallerBundle/Resources/fixtures/icecat_demo_dev/rules.yml) to see more examples of conditions.
