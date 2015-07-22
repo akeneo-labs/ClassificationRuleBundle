@@ -3,6 +3,7 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier;
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use PhpSpec\ObjectBehavior;
 use Pim\Bundle\CatalogBundle\Model\CategoryInterface;
 use Pim\Bundle\CatalogBundle\Model\GroupInterface;
@@ -104,16 +105,17 @@ class ProductsUpdaterSpec extends ObjectBehavior
 
     function it_classifies_product_when_the_rule_has_an_add_category_action(
         $templateUpdater,
+        $categoryRepository,
         CategoryInterface $category,
-        CategoryRepositoryInterface $categoryRepository,
         RuleInterface $rule,
         ProductInterface $product,
         ProductAddCategoryActionInterface $action
     ) {
-        $action->getCategoryCode()->willReturn('categoryCode');
         $rule->getActions()->willReturn([$action]);
 
+        $action->getCategoryCode()->willReturn('categoryCode');
         $categoryRepository->findOneByIdentifier('categoryCode')->willReturn($category);
+
         $product->addCategory($category)->shouldBeCalled();
 
         $product->getVariantGroup()->willReturn(null);
@@ -125,14 +127,15 @@ class ProductsUpdaterSpec extends ObjectBehavior
 
     function it_classifies_product_when_the_rule_has_an_set_category_action(
         $templateUpdater,
+        $categoryRepository,
         CategoryInterface $category,
         CategoryInterface $currentCategory,
-        CategoryRepositoryInterface $categoryRepository,
         RuleInterface $rule,
         ProductInterface $product,
         ProductSetCategoryActionInterface $action
     ) {
         $action->getCategoryCode()->willReturn('categoryCode');
+        $action->getTreeCode()->willReturn(null);
         $rule->getActions()->willReturn([$action]);
 
         $categoryRepository->findOneByIdentifier('categoryCode')->willReturn($category);
@@ -155,6 +158,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         ProductSetCategoryActionInterface $action
     ) {
         $action->getCategoryCode()->willReturn(null);
+        $action->getTreeCode()->willReturn(null);
         $rule->getActions()->willReturn([$action]);
 
         $product->getCategories()->willReturn([$currentCategory]);
@@ -166,6 +170,79 @@ class ProductsUpdaterSpec extends ObjectBehavior
             ->shouldNotBeCalled();
 
         $this->update($rule, [$product]);
+    }
+
+    function it_declassifies_product_on_a_tree_when_the_rule_has_an_set_action_with_tree(
+        $templateUpdater,
+        $categoryRepository,
+        CategoryInterface $currentCategory1,
+        CategoryInterface $currentCategory2,
+        CategoryInterface $tree,
+        RuleInterface $rule,
+        ProductInterface $product,
+        ProductSetCategoryActionInterface $action
+    ) {
+        $action->getCategoryCode()->willReturn(null);
+        $action->getTreeCode()->willReturn('TreeCode');
+        $rule->getActions()->willReturn([$action]);
+
+        $categoryRepository->findOneByIdentifier('TreeCode')->willReturn($tree);
+        $tree->getId()->willReturn(1);
+        $currentCategory1->getRoot()->willReturn(1);
+        $currentCategory2->getRoot()->willReturn(2);
+
+        $product->getCategories()->willReturn([$currentCategory1, $currentCategory2]);
+        $product->removeCategory($currentCategory1)->shouldBeCalled();
+        $product->removeCategory($currentCategory2)->shouldNotBeCalled();
+        $product->addCategory(Argument::any())->shouldNotBeCalled();
+
+        $product->getVariantGroup()->willReturn(null);
+        $templateUpdater->update(Argument::any(), Argument::any())
+            ->shouldNotBeCalled();
+
+        $this->update($rule, [$product]);
+    }
+
+    function it_throws_exception_when_category_code_does_not_exist(
+        $categoryRepository,
+        RuleInterface $rule,
+        ProductSetCategoryActionInterface $action,
+        ProductInterface $product
+    ) {
+        $rule->getActions()->willReturn([$action]);
+        $action->getCategoryCode()->willReturn('UnknownCode');
+        $action->getTreeCode()->willReturn(null);
+
+        $categoryRepository->findOneByIdentifier('UnknownCode')->willReturn(null);
+
+        $this
+            ->shouldThrow(
+                new EntityNotFoundException(
+                    'Impossible to apply rule to on this category cause the category "UnknownCode" does not exist'
+                )
+            )
+            ->during('update', [$rule, [$product]]);
+    }
+
+    function it_throws_exception_when_tree_code_does_not_exist(
+        $categoryRepository,
+        RuleInterface $rule,
+        ProductSetCategoryActionInterface $action,
+        ProductInterface $product
+    ) {
+        $rule->getActions()->willReturn([$action]);
+        $action->getCategoryCode()->willReturn(null);
+        $action->getTreeCode()->willReturn('UnknownCode');
+
+        $categoryRepository->findOneByIdentifier('UnknownCode')->willReturn(null);
+
+        $this
+            ->shouldThrow(
+                new EntityNotFoundException(
+                    'Impossible to apply rule to on this category cause the category "UnknownCode" does not exist'
+                )
+            )
+            ->during('update', [$rule, [$product]]);
     }
 
     function it_throws_exception_when_update_a_product_with_an_unknown_action(

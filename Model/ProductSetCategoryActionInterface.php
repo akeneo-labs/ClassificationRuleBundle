@@ -14,17 +14,30 @@ use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
  */
 interface ProductSetCategoryActionInterface extends ActionInterface
 {
+    /** @staticvar string */
     const ACTION_TYPE = 'set_category';
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCategoryCode();
 
     /**
      * @param string $categoryCode
      *
-     * @return ProductAddCategoryActionInterface
+     * @return ProductSetCategoryActionInterface
      */
     public function setCategoryCode($categoryCode);
+
+    /**
+     * @return string|null
+     */
+    public function getTreeCode();
+
+    /**
+     * @param string $treeCode
+     *
+     * @return ProductSetCategoryActionInterface
+     */
+    public function setTreeCode($treeCode);
 }

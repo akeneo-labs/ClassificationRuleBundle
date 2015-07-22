@@ -4,6 +4,9 @@ namespace PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplie
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityNotFoundException;
+use Pim\Bundle\CatalogBundle\Model\CategoryInterface;
+use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
 use Pim\Bundle\CatalogBundle\Updater\ProductTemplateUpdaterInterface;
 use Pim\Bundle\CatalogBundle\Updater\ProductUpdaterInterface;
@@ -64,15 +67,44 @@ class ProductsUpdater extends BaseProductsUpdater
     /**
      * Applies a add category action on a subject set, if this category exists.
      *
-     * @param \Pim\Bundle\CatalogBundle\Model\ProductInterface[] $products
-     * @param ProductAddCategoryActionInterface                  $action
+     * @param ProductInterface[]                $products
+     * @param ProductAddCategoryActionInterface $action
      *
      * @return ProductsUpdater
      */
     protected function applyAddCategoryAction(array $products, ProductAddCategoryActionInterface $action)
     {
+        $category = $this->getCategory($action->getCategoryCode());
         foreach ($products as $product) {
-            $category = $this->categoryRepository->findOneByIdentifier($action->getCategoryCode());
+            $product->addCategory($category);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Applies a set category action on a subject set, if this category exists.
+     *
+     * @param ProductInterface[]                $products
+     * @param ProductSetCategoryActionInterface $action
+     *
+     * @return ProductsUpdater
+     */
+    protected function applySetCategoryAction(array $products, ProductSetCategoryActionInterface $action)
+    {
+        $category = ($action->getCategoryCode()) ? $this->getCategory($action->getCategoryCode()) : null;
+        $tree     = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
+
+        foreach ($products as $product) {
+            // Remove categories (only a tree if asked) from the product
+            foreach ($product->getCategories() as $currentCategory) {
+                if (null === $tree) {
+                    $product->removeCategory($currentCategory);
+                } elseif ($currentCategory->getRoot() === $tree->getId()) {
+                    $product->removeCategory($currentCategory);
+                }
+            }
+
             if (null !== $category) {
                 $product->addCategory($category);
             }
@@ -82,29 +114,24 @@ class ProductsUpdater extends BaseProductsUpdater
     }
 
     /**
-     * Applies a set category action on a subject set, if this category exists.
+     * @param string $categoryCode
      *
-     * @param \Pim\Bundle\CatalogBundle\Model\ProductInterface[] $products
-     * @param ProductSetCategoryActionInterface                  $action
+     * @return CategoryInterface
      *
-     * @return ProductsUpdater
+     * @throws \Exception
      */
-    protected function applySetCategoryAction(array $products, ProductSetCategoryActionInterface $action)
+    protected function getCategory($categoryCode)
     {
-        foreach ($products as $product) {
-            $previousCategories = $product->getCategories();
-            foreach ($previousCategories as $category) {
-                $product->removeCategory($category);
-            }
-
-            if (null !== $action->getCategoryCode()) {
-                $newCategory = $this->categoryRepository->findOneByIdentifier($action->getCategoryCode());
-                if (null !== $newCategory) {
-                    $product->addCategory($newCategory);
-                }
-            }
+        $category = $this->categoryRepository->findOneByIdentifier($categoryCode);
+        if (null === $category) {
+            throw new EntityNotFoundException(
+                sprintf(
+                    'Impossible to apply rule to on this category cause the category "%s" does not exist',
+                    $categoryCode
+                )
+            );
         }
 
-        return $this;
+        return $category;
     }
 }
