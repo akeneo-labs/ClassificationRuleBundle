@@ -92,21 +92,22 @@ class ProductsUpdater extends BaseProductsUpdater
      */
     protected function applySetCategoryAction(array $products, ProductSetCategoryActionInterface $action)
     {
-        $category = $this->getCategory($action->getCategoryCode());
+        $category = ($action->getCategoryCode()) ? $this->getCategory($action->getCategoryCode()) : null;
         $tree     = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
 
         foreach ($products as $product) {
             // Remove categories (only a tree if asked) from the product
-            $categories = $product->getCategories();
-            foreach ($categories as $category) {
+            foreach ($product->getCategories() as $currentCategory) {
                 if (null === $tree) {
-                    $product->removeCategory($category);
-                } else if ($category->getRoot() === $tree->getId()) {
-                    $product->removeCategory($category);
+                    $product->removeCategory($currentCategory);
+                } elseif ($currentCategory->getRoot() === $tree->getId()) {
+                    $product->removeCategory($currentCategory);
                 }
             }
 
-            $product->addCategory($category);
+            if (null !== $category) {
+                $product->addCategory($category);
+            }
         }
 
         return $this;
@@ -122,7 +123,7 @@ class ProductsUpdater extends BaseProductsUpdater
     protected function getCategory($categoryCode)
     {
         $category = $this->categoryRepository->findOneByIdentifier($categoryCode);
-        if (null !== $category) {
+        if (null === $category) {
             throw new EntityNotFoundException(
                 sprintf(
                     'Impossible to apply rule to on this category cause the category "%s" does not exist',

@@ -25,7 +25,6 @@ class ProductSetCategoryAction extends AbstractCategoryAction implements Product
         $this->treeCode = isset($data['treeCode']) ? $data['treeCode'] : null;
     }
 
-
     /**
      * {@inheritdoc}
      */
