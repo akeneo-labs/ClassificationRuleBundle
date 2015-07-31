@@ -4,7 +4,9 @@ A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibilit
 
 ## Requirements
 
- - Akeneo PIM EE 1.3.x stable
+ - Akeneo PIM EE 1.4.x stable.
+
+This bundle is to be used with Akeneo 1.4, however, version 0.1 of the bundle can be used with Akeneo 1.3.
 
 ## Installation
 
