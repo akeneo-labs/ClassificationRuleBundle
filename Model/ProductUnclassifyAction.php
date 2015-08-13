@@ -10,7 +10,7 @@ namespace PimEnterprise\Bundle\ClassificationRuleBundle\Model;
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class ProductSetCategoryAction extends AbstractCategoryAction implements ProductSetCategoryActionInterface
+class ProductUnclassifyAction extends AbstractCategoryAction implements ProductUnclassifyActionInterface
 {
     /** @var string */
     protected $treeCode;

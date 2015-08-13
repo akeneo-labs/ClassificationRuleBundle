@@ -12,10 +12,10 @@ use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-interface ProductSetCategoryActionInterface extends ActionInterface
+interface ProductUnclassifyActionInterface extends ActionInterface
 {
     /** @staticvar string */
-    const ACTION_TYPE = 'set_category';
+    const ACTION_TYPE = 'unclassify';
 
     /**
      * @return string|null
@@ -25,7 +25,7 @@ interface ProductSetCategoryActionInterface extends ActionInterface
     /**
      * @param string $categoryCode
      *
-     * @return ProductSetCategoryActionInterface
+     * @return ProductUnclassifyActionInterface
      */
     public function setCategoryCode($categoryCode);
 
@@ -37,7 +37,7 @@ interface ProductSetCategoryActionInterface extends ActionInterface
     /**
      * @param string $treeCode
      *
-     * @return ProductSetCategoryActionInterface
+     * @return ProductUnclassifyActionInterface
      */
     public function setTreeCode($treeCode);
 }

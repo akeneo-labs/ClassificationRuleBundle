@@ -3,16 +3,16 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyAction;
 use Prophecy\Argument;
 
-class ProductAddCategoryActionSpec extends ObjectBehavior
+class ProductClassifyActionSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith(
             [
-                'type' => ProductAddCategoryAction::ACTION_TYPE,
+                'type' => ProductClassifyAction::ACTION_TYPE,
                 'categoryCode' => 'categoryCode',
             ]
         );
@@ -20,7 +20,7 @@ class ProductAddCategoryActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyAction');
     }
 
     function it_is_an_action()
@@ -30,7 +30,7 @@ class ProductAddCategoryActionSpec extends ObjectBehavior
 
     function it_is_a_product_copy_value_action()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface');
     }
 
     function it_constructs_a_product_action()

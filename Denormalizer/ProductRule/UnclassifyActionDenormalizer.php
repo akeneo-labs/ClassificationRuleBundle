@@ -2,7 +2,7 @@
 
 namespace PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule;
 
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class SetCategoryActionDenormalizer implements DenormalizerInterface
+class UnclassifyActionDenormalizer implements DenormalizerInterface
 {
     /** @var string */
     protected $setActionClass;
@@ -40,6 +40,6 @@ class SetCategoryActionDenormalizer implements DenormalizerInterface
     {
         return $type === $this->setActionClass &&
             isset($data['type']) &&
-            ProductSetCategoryActionInterface::ACTION_TYPE === $data['type'];
+            ProductUnclassifyActionInterface::ACTION_TYPE === $data['type'];
     }
 }

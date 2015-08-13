@@ -12,10 +12,10 @@ use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-interface ProductAddCategoryActionInterface extends ActionInterface
+interface ProductClassifyActionInterface extends ActionInterface
 {
     /** @staticvar string */
-    const ACTION_TYPE = 'add_category';
+    const ACTION_TYPE = 'classify';
 
     /**
      * @return string
@@ -25,7 +25,7 @@ interface ProductAddCategoryActionInterface extends ActionInterface
     /**
      * @param string $categoryCode
      *
-     * @return ProductAddCategoryActionInterface
+     * @return ProductClassifyActionInterface
      */
     public function setCategoryCode($categoryCode);
 }
