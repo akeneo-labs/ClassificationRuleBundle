@@ -1,3 +1,3 @@
 parameters:
-    pim_ee_classification_rule.model.add_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction
-    pim_ee_classification_rule.model.set_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryAction
+    pimee_classification_rule.model.add_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryAction
+    pimee_classification_rule.model.set_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryAction

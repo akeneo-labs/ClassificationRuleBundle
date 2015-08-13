@@ -1,6 +1,6 @@
 parameters:
-    pim_ee_classification_rule.denormalizer.product_rule.add_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\AddCategoryActionDenormalizer
-    pim_ee_classification_rule.denormalizer.product_rule.set_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\SetCategoryActionDenormalizer
+    pimee_classification_rule.denormalizer.product_rule.add_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\AddCategoryActionDenormalizer
+    pimee_classification_rule.denormalizer.product_rule.set_category_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\SetCategoryActionDenormalizer
 
 services:
     pimee_catalog_rule.denormalizer.product_rule.chained:
@@ -9,8 +9,8 @@ services:
             - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.condition']]
             - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.set_value_action']]
             - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.copy_value_action']]
-            - [addDenormalizer, ['@pim_ee_classification_rule.denormalizer.product_rule.add_category_action']]
-            - [addDenormalizer, ['@pim_ee_classification_rule.denormalizer.product_rule.set_category_action']]
+            - [addDenormalizer, ['@pimee_classification_rule.denormalizer.product_rule.add_category_action']]
+            - [addDenormalizer, ['@pimee_classification_rule.denormalizer.product_rule.set_category_action']]
             - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.content']]
             - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule']]
 
@@ -21,15 +21,15 @@ services:
             - %pimee_catalog_rule.model.product_condition.class%
             - copy_value: %pimee_catalog_rule.model.copy_value_action.class%
               set_value: %pimee_catalog_rule.model.set_value_action.class%
-              add_category: %pim_ee_classification_rule.model.add_category_action.class%
-              set_category: %pim_ee_classification_rule.model.set_category_action.class%
+              add_category: %pimee_classification_rule.model.add_category_action.class%
+              set_category: %pimee_classification_rule.model.set_category_action.class%
 
-    pim_ee_classification_rule.denormalizer.product_rule.add_category_action:
-        class: %pim_ee_classification_rule.denormalizer.product_rule.add_category_action.class%
+    pimee_classification_rule.denormalizer.product_rule.add_category_action:
+        class: %pimee_classification_rule.denormalizer.product_rule.add_category_action.class%
         arguments:
-            - %pim_ee_classification_rule.model.add_category_action.class%
+            - %pimee_classification_rule.model.add_category_action.class%
 
-    pim_ee_classification_rule.denormalizer.product_rule.set_category_action:
-            class: %pim_ee_classification_rule.denormalizer.product_rule.set_category_action.class%
+    pimee_classification_rule.denormalizer.product_rule.set_category_action:
+            class: %pimee_classification_rule.denormalizer.product_rule.set_category_action.class%
             arguments:
-                - %pim_ee_classification_rule.model.set_category_action.class%
+                - %pimee_classification_rule.model.set_category_action.class%
