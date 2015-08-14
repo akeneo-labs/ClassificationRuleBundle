@@ -94,21 +94,14 @@ class ProductsUpdater extends BaseProductsUpdater
      */
     protected function applyUnclassifyAction(array $products, ProductUnclassifyActionInterface $action)
     {
-        $category = ($action->getCategoryCode()) ? $this->getCategory($action->getCategoryCode()) : null;
-        $tree     = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
+        $tree = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
 
         foreach ($products as $product) {
             // Remove categories (only a tree if asked) from the product
             foreach ($product->getCategories() as $currentCategory) {
-                if (null === $tree) {
-                    $product->removeCategory($currentCategory);
-                } elseif ($currentCategory->getRoot() === $tree->getId()) {
+                if (null === $tree || $currentCategory->getRoot() === $tree->getId()) {
                     $product->removeCategory($currentCategory);
                 }
-            }
-
-            if (null !== $category) {
-                $product->addCategory($category);
             }
         }
 

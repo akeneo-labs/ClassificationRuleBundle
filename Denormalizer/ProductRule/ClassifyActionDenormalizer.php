@@ -6,7 +6,7 @@ use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInt
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Denormalize product set category rule actions.
+ * Denormalize product classify rule actions.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -15,21 +15,21 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 class ClassifyActionDenormalizer implements DenormalizerInterface
 {
     /** @var string */
-    protected $addActionClass;
+    protected $classify;
 
     /**
-     * @param string $addActionClass
+     * @param string $classify
      */
-    public function __construct($addActionClass)
+    public function __construct($classify)
     {
-        $this->addActionClass = $addActionClass;
+        $this->classify = $classify;
     }
     /**
      * {@inheritdoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        return new $this->addActionClass($data);
+        return new $this->classify($data);
     }
 
     /**
@@ -37,7 +37,7 @@ class ClassifyActionDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === $this->addActionClass &&
+        return $type === $this->classify &&
             isset($data['type']) &&
             ProductClassifyActionInterface::ACTION_TYPE === $data['type'];
     }

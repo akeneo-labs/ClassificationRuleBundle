@@ -20,18 +20,6 @@ interface ProductUnclassifyActionInterface extends ActionInterface
     /**
      * @return string|null
      */
-    public function getCategoryCode();
-
-    /**
-     * @param string $categoryCode
-     *
-     * @return ProductUnclassifyActionInterface
-     */
-    public function setCategoryCode($categoryCode);
-
-    /**
-     * @return string|null
-     */
     public function getTreeCode();
 
     /**
