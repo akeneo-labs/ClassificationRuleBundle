@@ -3,13 +3,14 @@
 namespace PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier;
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
+use Akeneo\Component\StorageUtils\Updater\PropertyCopierInterface;
+use Akeneo\Component\StorageUtils\Updater\PropertySetterInterface;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityNotFoundException;
 use Pim\Bundle\CatalogBundle\Model\CategoryInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
-use Pim\Bundle\CatalogBundle\Updater\ProductTemplateUpdaterInterface;
-use Pim\Bundle\CatalogBundle\Updater\ProductUpdaterInterface;
+use Pim\Component\Catalog\Updater\ProductTemplateUpdaterInterface;
 use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
 use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Engine\ProductRuleApplier\ProductsUpdater as BaseProductsUpdater;
@@ -32,11 +33,12 @@ class ProductsUpdater extends BaseProductsUpdater
      * {@inheritdoc}
      */
     public function __construct(
-        ProductUpdaterInterface $productUpdater,
+        PropertySetterInterface $propertySetter,
+        PropertyCopierInterface $propertyCopier,
         ProductTemplateUpdaterInterface $templateUpdater,
         CategoryRepositoryInterface $categoryRepository
     ) {
-        parent::__construct($productUpdater, $templateUpdater);
+        parent::__construct($propertySetter, $propertyCopier, $templateUpdater);
 
         $this->categoryRepository = $categoryRepository;
     }

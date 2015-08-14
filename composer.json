@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "akeneo/pim-enterprise-dev": "~1.3@stable"
+        "akeneo/pim-enterprise-dev": "~1.4@stable"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev",
