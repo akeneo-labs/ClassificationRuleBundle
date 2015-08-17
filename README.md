@@ -31,8 +31,8 @@ Then clean the cache:
 
 This bundle is an extension of the CatalogRuleBundle, so it uses the same conditions, and add a new set of actions:
 
-* `add_category`: add a product to a category,
-* `set_category`: add a product to a category and remove it from all other category.
+* `classify`: add a product to a category,
+* `unclassify`: add a product to a category and remove it from all other category.
 If you set the category code to `null`, it will declassify the product.
 You can also define a tree to declassify only the product's categories of this tree.
 
@@ -51,7 +51,7 @@ The category must exists, or the rule will not apply.
                   operator: CONTAINS
                   value:    Canon
             actions:
-                - type:         add_category
+                - type:         classify
                   categoryCode: category_canon
         player_set_philips_brand_category:
             conditions:
@@ -64,7 +64,7 @@ The category must exists, or the rule will not apply.
                   operator: CONTAINS
                   value:    Philips
             actions:
-                - type:         set_category
+                - type:         unclassify
                   categoryCode: category_philips
         mug_remove_oro_brand_category:
             conditions:
@@ -76,7 +76,7 @@ The category must exists, or the rule will not apply.
                   operator: CONTAINS
                   value:    Oro
             actions:
-                - type:         set_category
+                - type:         unclassify
                   categoryCode: null
         led_tvs_remove_category_on_master_tree:
             conditions:
@@ -85,7 +85,7 @@ The category must exists, or the rule will not apply.
                   value:
                     - led_tvs
             actions:
-                - type:     set_category
+                - type:     unclassify
                   treeCode: master
 
 

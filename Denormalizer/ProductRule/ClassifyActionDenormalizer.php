@@ -2,34 +2,34 @@
 
 namespace PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule;
 
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Denormalize product set category rule actions.
+ * Denormalize product classify rule actions.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class AddCategoryActionDenormalizer implements DenormalizerInterface
+class ClassifyActionDenormalizer implements DenormalizerInterface
 {
     /** @var string */
-    protected $addActionClass;
+    protected $classify;
 
     /**
-     * @param string $addActionClass
+     * @param string $classify
      */
-    public function __construct($addActionClass)
+    public function __construct($classify)
     {
-        $this->addActionClass = $addActionClass;
+        $this->classify = $classify;
     }
     /**
      * {@inheritdoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        return new $this->addActionClass($data);
+        return new $this->classify($data);
     }
 
     /**
@@ -37,8 +37,8 @@ class AddCategoryActionDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === $this->addActionClass &&
+        return $type === $this->classify &&
             isset($data['type']) &&
-            ProductAddCategoryActionInterface::ACTION_TYPE === $data['type'];
+            ProductClassifyActionInterface::ACTION_TYPE === $data['type'];
     }
 }

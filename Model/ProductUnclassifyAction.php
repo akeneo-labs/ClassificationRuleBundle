@@ -3,46 +3,46 @@
 namespace PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 /**
- * Add action used in product rules.
- * An add action category is used to add a product in a category.
+ * Set action used in product rules.
+ * An set action category is used to place a product in only one category.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-abstract class AbstractCategoryAction
+class ProductUnclassifyAction implements ProductUnclassifyActionInterface
 {
     /** @var string */
-    protected $categoryCode;
+    protected $treeCode;
 
     /**
      * @param array $data
      */
     public function __construct(array $data)
     {
-        $this->categoryCode = isset($data['categoryCode']) ? $data['categoryCode'] : null;
+        $this->treeCode = isset($data['treeCode']) ? $data['treeCode'] : null;
     }
 
     /**
-     * Get category code.
+     * Get tree code
      *
      * @return null|string
      */
-    public function getCategoryCode()
+    public function getTreeCode()
     {
-        return $this->categoryCode;
+        return $this->treeCode;
     }
 
     /**
-     * Set category code.
+     * Set tree code
      *
-     * @param string $categoryCode
+     * @param string $treeCode
      *
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setTreeCode($treeCode)
     {
-        $this->categoryCode = $categoryCode;
+        $this->treeCode = $treeCode;
 
         return $this;
     }

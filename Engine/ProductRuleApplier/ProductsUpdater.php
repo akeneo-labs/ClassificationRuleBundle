@@ -11,8 +11,8 @@ use Pim\Bundle\CatalogBundle\Model\CategoryInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
 use Pim\Component\Catalog\Updater\ProductTemplateUpdaterInterface;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Engine\ProductRuleApplier\ProductsUpdater as BaseProductsUpdater;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCopyValueActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductSetValueActionInterface;
@@ -54,10 +54,10 @@ class ProductsUpdater extends BaseProductsUpdater
                 $this->applySetAction($products, $action);
             } elseif ($action instanceof ProductCopyValueActionInterface) {
                 $this->applyCopyAction($products, $action);
-            } elseif ($action instanceof ProductAddCategoryActionInterface) {
-                $this->applyAddCategoryAction($products, $action);
-            } elseif ($action instanceof ProductSetCategoryActionInterface) {
-                $this->applySetCategoryAction($products, $action);
+            } elseif ($action instanceof ProductClassifyActionInterface) {
+                $this->applyClassifyAction($products, $action);
+            } elseif ($action instanceof ProductUnclassifyActionInterface) {
+                $this->applyUnclassifyAction($products, $action);
             } else {
                 throw new \LogicException(
                     sprintf('The action "%s" is not supported yet.', ClassUtils::getClass($action))
@@ -70,11 +70,11 @@ class ProductsUpdater extends BaseProductsUpdater
      * Applies a add category action on a subject set, if this category exists.
      *
      * @param ProductInterface[]                $products
-     * @param ProductAddCategoryActionInterface $action
+     * @param ProductClassifyActionInterface $action
      *
      * @return ProductsUpdater
      */
-    protected function applyAddCategoryAction(array $products, ProductAddCategoryActionInterface $action)
+    protected function applyClassifyAction(array $products, ProductClassifyActionInterface $action)
     {
         $category = $this->getCategory($action->getCategoryCode());
         foreach ($products as $product) {
@@ -88,27 +88,20 @@ class ProductsUpdater extends BaseProductsUpdater
      * Applies a set category action on a subject set, if this category exists.
      *
      * @param ProductInterface[]                $products
-     * @param ProductSetCategoryActionInterface $action
+     * @param ProductUnclassifyActionInterface $action
      *
      * @return ProductsUpdater
      */
-    protected function applySetCategoryAction(array $products, ProductSetCategoryActionInterface $action)
+    protected function applyUnclassifyAction(array $products, ProductUnclassifyActionInterface $action)
     {
-        $category = ($action->getCategoryCode()) ? $this->getCategory($action->getCategoryCode()) : null;
-        $tree     = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
+        $tree = ($action->getTreeCode()) ? $this->getCategory($action->getTreeCode()) : null;
 
         foreach ($products as $product) {
             // Remove categories (only a tree if asked) from the product
             foreach ($product->getCategories() as $currentCategory) {
-                if (null === $tree) {
-                    $product->removeCategory($currentCategory);
-                } elseif ($currentCategory->getRoot() === $tree->getId()) {
+                if (null === $tree || $currentCategory->getRoot() === $tree->getId()) {
                     $product->removeCategory($currentCategory);
                 }
-            }
-
-            if (null !== $category) {
-                $product->addCategory($category);
             }
         }
 

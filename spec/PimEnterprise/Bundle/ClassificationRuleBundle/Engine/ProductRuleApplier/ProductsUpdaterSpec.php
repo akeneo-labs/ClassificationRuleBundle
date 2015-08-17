@@ -13,8 +13,8 @@ use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductTemplateInterface;
 use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
 use Pim\Component\Catalog\Updater\ProductTemplateUpdaterInterface;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductAddCategoryActionInterface;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductCopyValueActionInterface;
 use PimEnterprise\Bundle\CatalogRuleBundle\Model\ProductSetValueActionInterface;
 use Prophecy\Argument;
@@ -116,13 +116,13 @@ class ProductsUpdaterSpec extends ObjectBehavior
         $this->update($rule, [$product]);
     }
 
-    function it_classifies_product_when_the_rule_has_an_add_category_action(
+    function it_classifies_product_when_the_rule_has_a_classify_action(
         $templateUpdater,
         $categoryRepository,
         CategoryInterface $category,
         RuleInterface $rule,
         ProductInterface $product,
-        ProductAddCategoryActionInterface $action
+        ProductClassifyActionInterface $action
     ) {
         $rule->getActions()->willReturn([$action]);
 
@@ -138,14 +138,14 @@ class ProductsUpdaterSpec extends ObjectBehavior
         $this->update($rule, [$product]);
     }
 
-    function it_classifies_product_when_the_rule_has_an_set_category_action(
+    function it_classifies_product_when_the_rule_has_an_unclassify_action(
         $templateUpdater,
         $categoryRepository,
         CategoryInterface $category,
         CategoryInterface $currentCategory,
         RuleInterface $rule,
         ProductInterface $product,
-        ProductSetCategoryActionInterface $action
+        ProductUnclassifyActionInterface $action
     ) {
         $action->getCategoryCode()->willReturn('categoryCode');
         $action->getTreeCode()->willReturn(null);
@@ -163,12 +163,12 @@ class ProductsUpdaterSpec extends ObjectBehavior
         $this->update($rule, [$product]);
     }
 
-    function it_declassifies_product_when_the_rule_has_an_set_category_action_without_category_code(
+    function it_declassifies_product_when_the_rule_has_an_unclassify_action_without_category_code(
         $templateUpdater,
         CategoryInterface $currentCategory,
         RuleInterface $rule,
         ProductInterface $product,
-        ProductSetCategoryActionInterface $action
+        ProductUnclassifyActionInterface $action
     ) {
         $action->getCategoryCode()->willReturn(null);
         $action->getTreeCode()->willReturn(null);
@@ -193,7 +193,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         CategoryInterface $tree,
         RuleInterface $rule,
         ProductInterface $product,
-        ProductSetCategoryActionInterface $action
+        ProductUnclassifyActionInterface $action
     ) {
         $action->getCategoryCode()->willReturn(null);
         $action->getTreeCode()->willReturn('TreeCode');
@@ -219,7 +219,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
     function it_throws_exception_when_category_code_does_not_exist(
         $categoryRepository,
         RuleInterface $rule,
-        ProductSetCategoryActionInterface $action,
+        ProductUnclassifyActionInterface $action,
         ProductInterface $product
     ) {
         $rule->getActions()->willReturn([$action]);
@@ -240,7 +240,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
     function it_throws_exception_when_tree_code_does_not_exist(
         $categoryRepository,
         RuleInterface $rule,
-        ProductSetCategoryActionInterface $action,
+        ProductUnclassifyActionInterface $action,
         ProductInterface $product
     ) {
         $rule->getActions()->willReturn([$action]);

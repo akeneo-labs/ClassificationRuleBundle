@@ -3,16 +3,16 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryAction;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyAction;
 use Prophecy\Argument;
 
-class ProductSetCategoryActionSpec extends ObjectBehavior
+class ProductUnclassifyActionSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith(
             [
-                'type' => ProductSetCategoryAction::ACTION_TYPE,
+                'type' => ProductUnclassifyAction::ACTION_TYPE,
                 'categoryCode' => 'categoryCode',
             ]
         );
@@ -20,7 +20,7 @@ class ProductSetCategoryActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryAction');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyAction');
     }
 
     function it_is_an_action()
@@ -30,7 +30,7 @@ class ProductSetCategoryActionSpec extends ObjectBehavior
 
     function it_is_a_product_copy_value_action()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductSetCategoryActionInterface');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface');
     }
 
     function it_constructs_a_product_action()

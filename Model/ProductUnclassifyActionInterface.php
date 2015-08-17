@@ -5,27 +5,27 @@ namespace PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
 
 /**
- * Add action used in product rules.
- * An add action category is used to ad a product in a category.
+ * Set action used in product rules.
+ * An set action category is used to place a product in only one category.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-interface ProductAddCategoryActionInterface extends ActionInterface
+interface ProductUnclassifyActionInterface extends ActionInterface
 {
     /** @staticvar string */
-    const ACTION_TYPE = 'add_category';
+    const ACTION_TYPE = 'unclassify';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCategoryCode();
+    public function getTreeCode();
 
     /**
-     * @param string $categoryCode
+     * @param string $treeCode
      *
-     * @return ProductAddCategoryActionInterface
+     * @return ProductUnclassifyActionInterface
      */
-    public function setCategoryCode($categoryCode);
+    public function setTreeCode($treeCode);
 }
