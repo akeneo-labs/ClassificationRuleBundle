@@ -3,6 +3,7 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Engine\ProductRuleApplier;
 
 use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
+use Akeneo\Component\Classification\Repository\CategoryRepositoryInterface;
 use Akeneo\Component\StorageUtils\Updater\PropertyCopierInterface;
 use Akeneo\Component\StorageUtils\Updater\PropertySetterInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -11,7 +12,6 @@ use Pim\Bundle\CatalogBundle\Model\CategoryInterface;
 use Pim\Bundle\CatalogBundle\Model\GroupInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductTemplateInterface;
-use Pim\Bundle\CatalogBundle\Repository\CategoryRepositoryInterface;
 use Pim\Component\Catalog\Updater\ProductTemplateUpdaterInterface;
 use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface;
 use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface;
@@ -130,31 +130,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         $categoryRepository->findOneByIdentifier('categoryCode')->willReturn($category);
 
         $product->addCategory($category)->shouldBeCalled();
-
-        $product->getVariantGroup()->willReturn(null);
-        $templateUpdater->update(Argument::any(), Argument::any())
-            ->shouldNotBeCalled();
-
-        $this->update($rule, [$product]);
-    }
-
-    function it_classifies_product_when_the_rule_has_an_unclassify_action(
-        $templateUpdater,
-        $categoryRepository,
-        CategoryInterface $category,
-        CategoryInterface $currentCategory,
-        RuleInterface $rule,
-        ProductInterface $product,
-        ProductUnclassifyActionInterface $action
-    ) {
-        $action->getCategoryCode()->willReturn('categoryCode');
-        $action->getTreeCode()->willReturn(null);
-        $rule->getActions()->willReturn([$action]);
-
-        $categoryRepository->findOneByIdentifier('categoryCode')->willReturn($category);
-        $product->getCategories()->willReturn([$currentCategory]);
-        $product->removeCategory($currentCategory)->shouldBeCalled();
-        $product->addCategory($category)->shouldBeCalled();
+        $product->removeCategory(Argument::any())->shouldNotBeCalled();
 
         $product->getVariantGroup()->willReturn(null);
         $templateUpdater->update(Argument::any(), Argument::any())
@@ -170,7 +146,6 @@ class ProductsUpdaterSpec extends ObjectBehavior
         ProductInterface $product,
         ProductUnclassifyActionInterface $action
     ) {
-        $action->getCategoryCode()->willReturn(null);
         $action->getTreeCode()->willReturn(null);
         $rule->getActions()->willReturn([$action]);
 
@@ -185,7 +160,7 @@ class ProductsUpdaterSpec extends ObjectBehavior
         $this->update($rule, [$product]);
     }
 
-    function it_declassifies_product_on_a_tree_when_the_rule_has_an_set_action_with_tree(
+    function it_declassifies_product_on_a_tree_when_the_rule_has_an_unclassify_action_with_tree(
         $templateUpdater,
         $categoryRepository,
         CategoryInterface $currentCategory1,
@@ -195,7 +170,6 @@ class ProductsUpdaterSpec extends ObjectBehavior
         ProductInterface $product,
         ProductUnclassifyActionInterface $action
     ) {
-        $action->getCategoryCode()->willReturn(null);
         $action->getTreeCode()->willReturn('TreeCode');
         $rule->getActions()->willReturn([$action]);
 
@@ -219,12 +193,11 @@ class ProductsUpdaterSpec extends ObjectBehavior
     function it_throws_exception_when_category_code_does_not_exist(
         $categoryRepository,
         RuleInterface $rule,
-        ProductUnclassifyActionInterface $action,
+        ProductClassifyActionInterface $action,
         ProductInterface $product
     ) {
         $rule->getActions()->willReturn([$action]);
         $action->getCategoryCode()->willReturn('UnknownCode');
-        $action->getTreeCode()->willReturn(null);
 
         $categoryRepository->findOneByIdentifier('UnknownCode')->willReturn(null);
 
@@ -244,7 +217,6 @@ class ProductsUpdaterSpec extends ObjectBehavior
         ProductInterface $product
     ) {
         $rule->getActions()->willReturn([$action]);
-        $action->getCategoryCode()->willReturn(null);
         $action->getTreeCode()->willReturn('UnknownCode');
 
         $categoryRepository->findOneByIdentifier('UnknownCode')->willReturn(null);

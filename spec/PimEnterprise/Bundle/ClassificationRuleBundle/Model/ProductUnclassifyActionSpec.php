@@ -3,7 +3,7 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyAction;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface;
 use Prophecy\Argument;
 
 class ProductUnclassifyActionSpec extends ObjectBehavior
@@ -12,15 +12,15 @@ class ProductUnclassifyActionSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             [
-                'type' => ProductUnclassifyAction::ACTION_TYPE,
-                'categoryCode' => 'categoryCode',
+                'type' => ProductUnclassifyActionInterface::ACTION_TYPE,
+                'treeCode' => 'treeCode',
             ]
         );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyAction');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyActionInterface');
     }
 
     function it_is_an_action()
@@ -35,6 +35,6 @@ class ProductUnclassifyActionSpec extends ObjectBehavior
 
     function it_constructs_a_product_action()
     {
-        $this->getCategoryCode()->shouldReturn('categoryCode');
+        $this->getTreeCode()->shouldReturn('treeCode');
     }
 }

@@ -6,7 +6,9 @@ A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibilit
 
  - Akeneo PIM EE 1.4.x stable.
 
-This bundle is to be used with Akeneo 1.4, however, version 0.1 of the bundle can be used with Akeneo 1.3.
+This bundle is to be used with Akeneo 1.4.
+
+You can use version 0.1 of the bundle with Akeneo 1.3. However, this version of the bundle is not maintained.
 
 ## Installation
 
@@ -65,7 +67,6 @@ The category must exists, or the rule will not apply.
                   value:    Philips
             actions:
                 - type:         unclassify
-                  categoryCode: category_philips
         mug_remove_oro_brand_category:
             conditions:
                 - field:    family.code
@@ -77,7 +78,7 @@ The category must exists, or the rule will not apply.
                   value:    Oro
             actions:
                 - type:         unclassify
-                  categoryCode: null
+                  treeCode: null
         led_tvs_remove_category_on_master_tree:
             conditions:
                 - field:    family.code

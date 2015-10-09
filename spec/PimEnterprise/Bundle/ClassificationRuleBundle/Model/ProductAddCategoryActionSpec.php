@@ -3,7 +3,7 @@
 namespace spec\PimEnterprise\Bundle\ClassificationRuleBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyAction;
+use PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface;
 use Prophecy\Argument;
 
 class ProductClassifyActionSpec extends ObjectBehavior
@@ -12,7 +12,7 @@ class ProductClassifyActionSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             [
-                'type' => ProductClassifyAction::ACTION_TYPE,
+                'type' => ProductClassifyActionInterface::ACTION_TYPE,
                 'categoryCode' => 'categoryCode',
             ]
         );
@@ -20,7 +20,7 @@ class ProductClassifyActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyAction');
+        $this->shouldHaveType('PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyActionInterface');
     }
 
     function it_is_an_action()
