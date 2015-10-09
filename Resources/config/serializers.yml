@@ -1,5 +1,5 @@
 parameters:
-    pimee_classification_rule.denormalizer.product_rule.classify_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\ClassifyActionDenormalizer
+    pimee_classification_rule.denormalizer.product_rule.classify_action.class:   PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\ClassifyActionDenormalizer
     pimee_classification_rule.denormalizer.product_rule.unclassify_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\UnclassifyActionDenormalizer
 
 services:
@@ -20,8 +20,8 @@ services:
             - %akeneo_rule_engine.model.rule.class%
             - %pimee_catalog_rule.model.product_condition.class%
             - copy_value: %pimee_catalog_rule.model.copy_value_action.class%
-              set_value: %pimee_catalog_rule.model.set_value_action.class%
-              classify: %pimee_classification_rule.model.classify_action.class%
+              set_value:  %pimee_catalog_rule.model.set_value_action.class%
+              classify:   %pimee_classification_rule.model.classify_action.class%
               unclassify: %pimee_classification_rule.model.unclassify_action.class%
 
     pimee_classification_rule.denormalizer.product_rule.classify_action:
