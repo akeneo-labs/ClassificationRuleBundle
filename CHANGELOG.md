@@ -1,4 +1,4 @@
-# 1.0 (2015-10-09)
+# 1.0.0 (2015-10-09)
 ## New feature
 - Compatible with Akeneo 1.4
 
