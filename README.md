@@ -1,14 +1,15 @@
-# Akeneo Classification rule bundle
+# ClassificationRuleBundle
 
-A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibility to classify products.
+A bundle that extend the Pim Enterprise CatalogRuleBundle, adding the possibility to classify/unclassify products.
+
 
 ## Requirements
 
- - Akeneo PIM EE 1.4.x stable.
+| ClassificationRuleBundle | Akeneo PIM Enterprise Edition |
+|:------------------------:|:-----------------------------:|
+| v0.1.*                   | v1.3.*                        |
+| v1.0.*                   | v1.4.*                        |
 
-This bundle is to be used with Akeneo 1.4.
-
-You can use version 0.1 of the bundle with Akeneo 1.3. However, this version of the bundle is not maintained.
 
 ## Installation
 
@@ -21,13 +22,16 @@ If you want to use the development version (only for test purpose, do not use it
 Enable the bundle in the `app/AppKernel.php` file, in the `getPimEnterpriseBundles` function:
 
     return[
-        …
+        // ...
         new PimEnterprise\Bundle\ClassificationRuleBundle\PimEnterpriseClassificationRuleBundle(),
     ];
 
-Then clean the cache:
+Then clean the cache and reinstall the assets:
 
     php app/console cache:clear --env=prod
+    
+    php app/console pim:install:assets --env=prod
+
 
 ## Rule definition
 
