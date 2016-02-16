@@ -26,6 +26,12 @@ Enable the bundle in the `app/AppKernel.php` file, in the `getPimEnterpriseBundl
         new PimEnterprise\Bundle\ClassificationRuleBundle\PimEnterpriseClassificationRuleBundle(),
     ];
 
+Then clean the cache and reinstall the assets:
+
+    php app/console cache:clear --env=prod
+    
+    php app/console pim:install:assets --env=prod
+
 
 ## Rule definition
 
