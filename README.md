@@ -48,11 +48,9 @@ Then clean the cache and reinstall the assets:
 
 This bundle is an extension of the CatalogRuleBundle, so it uses the same conditions, and add a new set of actions:
 
-* `unclassify`: add a product to a category and remove it from all other category.
+* `unclassify`: remove a product from categories.
 If you set the category code to `null`, it will declassify the product.
 You can also define a tree to declassify only the product's categories of this tree.
-
-The category must exists, or the rule will not apply.
 
 ### Examples
 
