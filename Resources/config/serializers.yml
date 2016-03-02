@@ -1,35 +1,8 @@
-parameters:
-    pimee_classification_rule.denormalizer.product_rule.classify_action.class:   PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\ClassifyActionDenormalizer
-    pimee_classification_rule.denormalizer.product_rule.unclassify_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Denormalizer\ProductRule\UnclassifyActionDenormalizer
-
 services:
-    pimee_catalog_rule.denormalizer.product_rule.chained:
-        class: %pimee_catalog_rule.denormalizer.product_rule.chained.class%
-        calls:
-            - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.condition']]
-            - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.set_value_action']]
-            - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.copy_value_action']]
-            - [addDenormalizer, ['@pimee_classification_rule.denormalizer.product_rule.classify_action']]
-            - [addDenormalizer, ['@pimee_classification_rule.denormalizer.product_rule.unclassify_action']]
-            - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule.content']]
-            - [addDenormalizer, ['@pimee_catalog_rule.denormalizer.product_rule']]
-
-    pimee_catalog_rule.denormalizer.product_rule.content:
-        class: %pimee_catalog_rule.denormalizer.product_rule.content.class%
-        arguments:
-            - %akeneo_rule_engine.model.rule.class%
-            - %pimee_catalog_rule.model.product_condition.class%
-            - copy_value: %pimee_catalog_rule.model.copy_value_action.class%
-              set_value:  %pimee_catalog_rule.model.set_value_action.class%
-              classify:   %pimee_classification_rule.model.classify_action.class%
-              unclassify: %pimee_classification_rule.model.unclassify_action.class%
-
-    pimee_classification_rule.denormalizer.product_rule.classify_action:
-        class: %pimee_classification_rule.denormalizer.product_rule.classify_action.class%
-        arguments:
-            - %pimee_classification_rule.model.classify_action.class%
-
     pimee_classification_rule.denormalizer.product_rule.unclassify_action:
-        class: %pimee_classification_rule.denormalizer.product_rule.unclassify_action.class%
+        class: %pimee_catalog_rule.denormalizer.product_rule.action.class%
         arguments:
             - %pimee_classification_rule.model.unclassify_action.class%
+            - 'unclassify'
+        tags:
+            - { name: 'pimee_catalog_rule.denormalizer.product_rule' }
