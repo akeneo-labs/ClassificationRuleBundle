@@ -1,5 +1,5 @@
 parameters:
-    pimee_classification_rule.action_applier.unclassify.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\UnclassifyActionApplier
+    pimee_classification_rule.action_applier.unclassify.class: PimEnterprise\Bundle\ClassificationRuleBundle\ActionApplier\UnclassifyActionApplier
 
 services:
     pimee_classification_rule.action_applier.unclassify:

@@ -13,4 +13,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class PimEnterpriseClassificationRuleBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'PimEnterpriseCatalogRuleBundle';
+    }
 }
