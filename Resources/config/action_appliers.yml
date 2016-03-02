@@ -1,0 +1,10 @@
+parameters:
+    pimee_classification_rule.action_applier.unclassify.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\UnclassifyActionApplier
+
+services:
+    pimee_classification_rule.action_applier.unclassify:
+        class: %pimee_classification_rule.action_applier.unclassify.class%
+        arguments:
+            - '@pim_catalog.repository.category'
+        tags:
+            - { name: akeneo_rule_engine.action_applier, priority: 100 }

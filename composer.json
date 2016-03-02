@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Akeneo PIM Enterprise bundle to classify products with the rule engine",
     "keywords": ["pim", "akeneo", "ecommerce", "classification", "rules"],
-    "license": "proprietary",
+    "license": "OSL-3.0",
     "authors": [
         {
             "name":     "Akeneo",
@@ -18,24 +18,21 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/akeneo/platform.git",
+            "url": "https://github.com/akeneo/pim-enterprise-dev.git",
             "branch": "master"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/akeneo/pim-enterprise-dev.git"
         }
     ],
     "require": {
-        "akeneo/pim-enterprise-dev": "1.4.*"
+        "akeneo/pim-enterprise-dev": "1.5.x-dev",
+        "akeneo/pim-community-dev": "1.5.x-dev",
+        "doctrine/migrations": "1.0.0-alpha3@alpha"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
+        "phpspec/phpspec": "2.1.*",
+        "squizlabs/php_codesniffer": "2.3.*",
+        "phpmd/phpmd": "2.3.*",
         "fabpot/php-cs-fixer": "@stable",
-        "squizlabs/php_codesniffer": "1.*",
-        "pdepend/pdepend": "1.1.*",
-        "phpmd/phpmd": "1.*"
+        "henrikbjorn/phpspec-code-coverage": "1.0.*"
     },
     "autoload": {
         "psr-0": { "PimEnterprise\\Bundle\\ClassificationRuleBundle\\": "" }
@@ -43,6 +40,11 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "dev",
-    "target-dir": "PimEnterprise/Bundle/ClassificationRuleBundle"
+    "minimum-stability": "stable",
+    "target-dir": "PimEnterprise/Bundle/ClassificationRuleBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
 }

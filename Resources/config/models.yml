@@ -1,3 +1,2 @@
 parameters:
-    pimee_classification_rule.model.classify_action.class:   PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductClassifyAction
     pimee_classification_rule.model.unclassify_action.class: PimEnterprise\Bundle\ClassificationRuleBundle\Model\ProductUnclassifyAction

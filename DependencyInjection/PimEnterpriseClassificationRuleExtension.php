@@ -22,7 +22,7 @@ class PimEnterpriseClassificationRuleExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('engine.yml');
+        $loader->load('action_appliers.yml');
         $loader->load('models.yml');
         $loader->load('serializers.yml');
     }
