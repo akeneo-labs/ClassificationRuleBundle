@@ -1,0 +1,32 @@
+{% for action in value.actions %}
+    <p class="no-margin">
+        {% if action.type in ["copy", "copy_value"] %}
+            {% set parameters = {
+                '%from_field%': action.from_field|append_locale_and_scope_context(action.from_locale|default, action.from_scope|default)|highlight,
+                '%to_field%': action.to_field|append_locale_and_scope_context(action.to_locale|default, action.to_scope|default)|highlight
+            } %}
+            {{ ('pimee_catalog_rule.actions.type.' ~ action.type) |trans(parameters)|raw }}
+        {% elseif action.type in ["add"] %}
+            {% for key,actionField in action %}
+                {{ key }} ... {{ actionField }}
+            {% endfor %}
+            {% set parameters = {
+                '%field%': action.field|append_locale_and_scope_context(action.options.locale|default, action.options.scope|default)|highlight,
+                '%value%': action.items|present_rule_action_value(action.field)|highlight,
+            } %}
+            {{ ('pimee_catalog_rule.actions.type.' ~ action.type) |trans(parameters)|raw }}
+        {% elseif action.type in ["unclassify"] %}
+            {% if action.treeCode is defined %}
+                {{ ('pimee_catalog_rule.actions.type.unclassify_from_tree') | trans({'%tree_code%': action.treeCode|highlight}) | raw }}
+            {% else %}
+                {{ 'pimee_catalog_rule.actions.type.unclassify' | trans() | raw }}
+            {% endif %}
+        {% else %}
+            {% set parameters = {
+                '%value%': action.value|present_rule_action_value(action.field)|highlight,
+                '%field%': action.field|append_locale_and_scope_context(action.locale|default, action.scope|default)|highlight
+            } %}
+            {{ ('pimee_catalog_rule.actions.type.' ~ action.type) |trans(parameters)|raw }}
+        {% endif %}
+    </p>
+{% endfor %}

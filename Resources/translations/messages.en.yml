@@ -1,0 +1,5 @@
+pimee_catalog_rule:
+    actions:
+        type:
+            unclassify: Then products are unclassified
+            unclassify_from_tree: Then products are unclassified from tree %tree_code%

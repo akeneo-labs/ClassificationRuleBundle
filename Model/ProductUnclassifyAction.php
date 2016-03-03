@@ -24,8 +24,6 @@ class ProductUnclassifyAction implements ProductUnclassifyActionInterface
     }
 
     /**
-     * Get tree code
-     *
      * @return null|string
      */
     public function getTreeCode()
@@ -34,11 +32,9 @@ class ProductUnclassifyAction implements ProductUnclassifyActionInterface
     }
 
     /**
-     * Set tree code
-     *
      * @param string $treeCode
      *
-     * @return $this
+     * @return ProductUnclassifyActionInterface
      */
     public function setTreeCode($treeCode)
     {
