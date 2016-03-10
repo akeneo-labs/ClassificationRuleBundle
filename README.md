@@ -32,7 +32,7 @@ Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` meth
     ];
 ```
 
-Now let's clear your cache, update your database and reinstall your assets:
+Now let's clear your cache and reinstall your assets:
 
 ```bash
     php app/console cache:clear --env=prod
