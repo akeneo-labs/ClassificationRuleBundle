@@ -25,10 +25,10 @@ You can install the bundle with composer:
 
 If you want to use the development version (only for test purpose, do not use it in production), replace `1.0.*` by `dev-master` in the previous command.
 
-Enable the bundle in the `app/AppKernel.php` file, in the `getPimEnterpriseBundles` function:
+Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` method:
 
 ```php
-    return[
+    $bundles = [
         // ...
         new PimEnterprise\Bundle\ClassificationRuleBundle\PimEnterpriseClassificationRuleBundle(),
     ];
