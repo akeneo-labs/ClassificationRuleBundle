@@ -20,10 +20,8 @@ A bundle that extend the Akeneo PIM Enterprise CatalogRuleBundle, adding the pos
 You can install the bundle with composer:
 
 ```bash
-    $ php composer.phar require akeneo-labs/classification-rule-bundle:1.1.*
+    php composer.phar require akeneo-labs/classification-rule-bundle:1.1.*
 ```
-
-If you want to use the development version (only for test purpose, do not use it in production), replace `1.0.*` by `dev-master` in the previous command.
 
 Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` method:
 
@@ -38,7 +36,6 @@ Then clean the cache and reinstall the assets:
 
 ```bash
     php app/console cache:clear --env=prod
-
     php app/console pim:install:assets --env=prod
 ```
 
