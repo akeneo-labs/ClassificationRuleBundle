@@ -1,8 +1,5 @@
 # ClassificationRuleBundle
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/akeneo-labs/ClassificationRuleBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/akeneo-labs/ClassificationRuleBundle/?branch=master)
-[![Build Status](https://travis-ci.org/akeneo-labs/ClassificationRuleBundle.svg?branch=master)](https://travis-ci.org/akeneo-labs/ClassificationRuleBundle)
-
 A bundle that extend the Akeneo PIM Enterprise CatalogRuleBundle, adding the possibility to unclassify products from a defined tree.
 
 
