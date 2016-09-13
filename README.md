@@ -7,6 +7,7 @@ A bundle that extend the Akeneo PIM Enterprise CatalogRuleBundle, adding the pos
 
 | ClassificationRuleBundle | Akeneo PIM Enterprise Edition |
 |:------------------------:|:-----------------------------:|
+| v1.2.*                   | >= v1.6                       |
 | v1.1.*                   | v1.5.*                        |
 | v1.0.*                   | v1.4.*                        |
 | v0.1.*                   | v1.3.*                        |
@@ -17,7 +18,7 @@ A bundle that extend the Akeneo PIM Enterprise CatalogRuleBundle, adding the pos
 You can install the bundle with composer:
 
 ```bash
-    php composer.phar require akeneo-labs/classification-rule-bundle:1.1.*
+    php composer.phar require akeneo-labs/classification-rule-bundle:1.2.*
 ```
 
 Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` method:
@@ -48,43 +49,6 @@ You can also define a tree to declassify only the product's categories of this t
 
 ### Examples
 
-```yaml
-    rules:
-        player_set_philips_brand_category:
-            conditions:
-                - field:    family.code
-                  operator: IN
-                  value:
-                    - camcorders
-                    - mp3_players
-                - field:    name
-                  operator: CONTAINS
-                  value:    Philips
-            actions:
-                - type:     unclassify
-
-        mug_remove_oro_brand_category:
-            conditions:
-                - field:    family.code
-                  operator: IN
-                  value:
-                    - mugs
-                - field:    name
-                  operator: CONTAINS
-                  value:    Oro
-            actions:
-                - type:     unclassify
-                  treeCode: null
-
-        led_tvs_remove_category_on_master_tree:
-            conditions:
-                - field:    family.code
-                  operator: IN
-                  value:
-                    - led_tvs
-            actions:
-                - type:     unclassify
-                  treeCode: master
-```
+[File example](Resources/doc/rules.yml)
 
 Take a look to [the rule definition documentation](http://docs.akeneo.com/latest/cookbook/rule/general_information_on_rule_format.html?highlight=rule%20definition) to see more examples of conditions.
