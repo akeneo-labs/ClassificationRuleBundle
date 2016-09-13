@@ -7,7 +7,7 @@ A bundle that extend the Akeneo PIM Enterprise CatalogRuleBundle, adding the pos
 
 | ClassificationRuleBundle | Akeneo PIM Enterprise Edition |
 |:------------------------:|:-----------------------------:|
-| v1.2.*                   | > v1.6                        |
+| v1.2.*                   | >= v1.6                       |
 | v1.1.*                   | v1.5.*                        |
 | v1.0.*                   | v1.4.*                        |
 | v0.1.*                   | v1.3.*                        |
