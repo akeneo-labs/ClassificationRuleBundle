@@ -1,0 +1,36 @@
+rules:
+    player_set_philips_brand_category:
+        conditions:
+            - field:    family.code
+              operator: IN
+              value:
+                - camcorders
+                - mp3_players
+            - field:    name
+              operator: CONTAINS
+              value:    Philips
+        actions:
+            - type:     unclassify
+
+    mug_remove_oro_brand_category:
+        conditions:
+            - field:    family.code
+              operator: IN
+              value:
+                - mugs
+            - field:    name
+              operator: CONTAINS
+              value:    Oro
+        actions:
+            - type:     unclassify
+              treeCode: null
+
+    led_tvs_remove_category_on_master_tree:
+        conditions:
+            - field:    family.code
+              operator: IN
+              value:
+                - led_tvs
+        actions:
+            - type:     unclassify
+              treeCode: master
